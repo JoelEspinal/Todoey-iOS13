@@ -11,12 +11,12 @@
         <scene sceneID="lPI-KG-q4j">
             <objects>
                 <tableViewController id="IPx-ng-7ch" customClass="TodoListViewController" customModule="Todoey" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="CRX-tK-2iz">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="TodoItemCell" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="CRX-tK-2iz">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="6Le-qf-362" customClass="TodoItemCell">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TodoItemCell" id="6Le-qf-362">
                                 <rect key="frame" x="0.0" y="50" width="393" height="43.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6Le-qf-362" id="xHs-Wn-Wyp">
@@ -39,7 +39,7 @@
         <!--Todoy-->
         <scene sceneID="HUF-x4-QWl">
             <objects>
-                <navigationController title="Todoy" automaticallyAdjustsScrollViewInsets="NO" id="OnF-mO-OM4" colorLabel="IBBuiltInLabel-Purple" sceneMemberID="viewController">
+                <navigationController title="Todoy" automaticallyAdjustsScrollViewInsets="NO" id="OnF-mO-OM4" colorLabel="IBBuiltInLabel-Gray" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="jM9-ps-V9F" colorLabel="IBBuiltInLabel-Blue">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
