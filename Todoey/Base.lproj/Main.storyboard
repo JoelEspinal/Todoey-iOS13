@@ -30,7 +30,14 @@
                             <outlet property="delegate" destination="IPx-ng-7ch" id="xRG-cH-317"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Todoy" id="FbC-la-fB9"/>
+                    <navigationItem key="navigationItem" title="Todoy" id="FbC-la-fB9">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="vCR-uH-rUK">
+                            <color key="tintColor" systemColor="systemOrangeColor"/>
+                            <connections>
+                                <action selector="addButtonPressed:" destination="IPx-ng-7ch" id="qPK-jT-doa"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZKZ-nt-CJc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
