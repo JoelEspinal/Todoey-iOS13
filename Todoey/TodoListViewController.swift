@@ -11,7 +11,6 @@ import UIKit
 class TodoListViewController: UITableViewController {
 
     var itemArray = ["A", "B", "C"]
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,13 +35,11 @@ class TodoListViewController: UITableViewController {
     // MARK - TableView Delegate Methods
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(itemArray[indexPath.row])
-        
-      
-        
+
         if tableView.cellForRow(at: indexPath)?.accessoryType == .checkmark {
             tableView.cellForRow(at: indexPath)?.accessoryType = .none
         } else {
-                tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
+            tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
         }
         
         tableView.deselectRow(at: indexPath, animated: true)
@@ -50,28 +47,22 @@ class TodoListViewController: UITableViewController {
     
     // MARK - Add New Item
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
-        let alert = UIAlertController(title: "Add new Todoey Item", message: "", preferredStyle: .alert)
         
-       
+        let alert = UIAlertController(title: "Add new Todoey Item", message: "", preferredStyle: .alert)
+
+        let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
+                
+            print("Sucess!")
+                
+        }
+    
+        
         alert.addTextField { (alertTextField) in
             alertTextField.placeholder = "Create New Item"
-            
-            if let text = alertTextField.text {
-                print(text)
-            }
-        }
-        
-        
-        let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
-            if let todoItem = action.title {
-                print(todoItem)
-            }
             
         }
         
         alert.addAction(action)
-        
-        
         present(alert, animated: true, completion: nil)
     }
 }
