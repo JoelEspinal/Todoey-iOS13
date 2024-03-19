@@ -47,19 +47,21 @@ class TodoListViewController: UITableViewController {
     
     // MARK - Add New Item
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
+        var textField = UITextField()
         
         let alert = UIAlertController(title: "Add new Todoey Item", message: "", preferredStyle: .alert)
 
         let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
                 
             print("Sucess!")
-                
+            print(textField.text!)
+            print("-------")
         }
     
         
         alert.addTextField { (alertTextField) in
             alertTextField.placeholder = "Create New Item"
-            
+            textField = alertTextField
         }
         
         alert.addAction(action)
