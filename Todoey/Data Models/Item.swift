@@ -10,6 +10,6 @@ import Foundation
 
 class Item {
     
-    let title: String = ""
-    let donde: Bool = false
+    var title: String = ""
+    var done: Bool = false
 }
