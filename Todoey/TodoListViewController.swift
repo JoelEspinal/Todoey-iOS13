@@ -56,6 +56,7 @@ class TodoListViewController: UITableViewController {
             let newItem = textField.text!
             if !newItem.isEmpty {
                 self.itemArray.append(newItem)
+                self.tableView.reloadData()
             }
         }
     
