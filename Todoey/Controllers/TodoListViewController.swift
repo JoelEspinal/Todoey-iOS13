@@ -17,12 +17,14 @@ class TodoListViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        
         tableView.delegate = self
         tableView.dataSource = self
         
-//        if let items = defaults.array(forKey: "TodoListArray") as? [String] {
-//            itemArray = []
-//        }
+        if let items = defaults.array(forKey: "TodoListArray") as? [Item] {
+            itemArray = items
+        }
     }
     
     // MARK - Tableview DatasourceMethodd
@@ -68,7 +70,7 @@ class TodoListViewController: UITableViewController {
                 let newItem = Item()
                 newItem.title = newTitle
                 self.itemArray.append(newItem)
-//                self.defaults.set(self.itemArray, forKey: "TodoListArray")
+                self.defaults.set(self.itemArray, forKey: "TodoListArray")
                 self.tableView.reloadData()
             }
         }
