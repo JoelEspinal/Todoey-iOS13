@@ -62,7 +62,8 @@ class TodoListViewController: UITableViewController {
         let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
             let newTitle = textField.text!
             if !newTitle.isEmpty {
-                let newItem = Item()
+                let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+                let newItem = Item(context: context)
                 newItem.title = newTitle
                 self.itemArray.append(newItem)
                 self.saveItems()
