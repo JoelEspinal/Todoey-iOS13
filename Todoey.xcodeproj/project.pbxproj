@@ -37,17 +37,10 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		74847E702BAB3A5F00F61205 /* Data Models */ = {
-			isa = PBXGroup;
-			children = (
-				EB2BE4FD239524DB00FB933B /* TodoListViewController.swift */,
-			);
-			path = "Data Models";
-			sourceTree = "<group>";
-		};
 		74847E712BAB3A7100F61205 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				EB2BE4FD239524DB00FB933B /* TodoListViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -96,7 +89,6 @@
 			isa = PBXGroup;
 			children = (
 				74A224252BB2089A0080833F /* Data Model */,
-				74847E702BAB3A5F00F61205 /* Data Models */,
 				EB2BE4F9239524DB00FB933B /* AppDelegate.swift */,
 				74847E722BAB3AC700F61205 /* Views */,
 				EB2BE502239524DC00FB933B /* Assets.xcassets */,
