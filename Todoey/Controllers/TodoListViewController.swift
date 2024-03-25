@@ -12,6 +12,7 @@ class TodoListViewController: UITableViewController {
     
     var itemArray: [Item] = [Item]()
     let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Items.plist")
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,7 +63,6 @@ class TodoListViewController: UITableViewController {
         let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
             let newTitle = textField.text!
             if !newTitle.isEmpty {
-                let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
                 let newItem = Item(context: context)
                 newItem.title = newTitle
                 self.itemArray.append(newItem)
