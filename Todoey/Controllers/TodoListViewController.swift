@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class TodoListViewController: UITableViewController {
     
@@ -20,7 +21,7 @@ class TodoListViewController: UITableViewController {
         tableView.delegate = self
         tableView.dataSource = self
 
-        loadItems()
+        // loadItems()
     }
     
     // MARK - Tableview DatasourceMethodd
@@ -63,14 +64,14 @@ class TodoListViewController: UITableViewController {
         let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
             let newTitle = textField.text!
             if !newTitle.isEmpty {
-                let newItem = Item(context: context)
+                let newItem = Item(context: self.context)
                 newItem.title = newTitle
+                newItem.done = false
                 self.itemArray.append(newItem)
                 self.saveItems()
             }
         }
     
-        
         alert.addTextField { (alertTextField) in
             alertTextField.placeholder = "Create New Item"
             textField = alertTextField
@@ -84,24 +85,23 @@ class TodoListViewController: UITableViewController {
         let encoder = PropertyListEncoder()
         
         do {
-            let data = try encoder.encode(itemArray)
-            try data.write(to: dataFilePath!)
+            try self.context.save()
         } catch {
-            print("Error encoding item array. \(error)")
+            print("Error saving context. \(error)")
         }
         
         self.tableView.reloadData()
     }
     
     func loadItems() {
-        if let data = try? Data(contentsOf: dataFilePath!) {
-            let decoder = PropertyListDecoder()
-            do {
-                itemArray = try decoder.decode([Item].self, from: data)
-            } catch {
-                print("Error decoding item array \(error)")
-            }
-        }
+//        if let data = try? Data(contentsOf: dataFilePath!) {
+//            let decoder = PropertyListDecoder()
+//            do {
+//                itemArray = try decoder.decode([Item].self, from: data)
+//            } catch {
+//                print("Error decoding item array \(error)")
+//            }
+//        }
     }
 }
     
