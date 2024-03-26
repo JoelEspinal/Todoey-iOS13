@@ -19,7 +19,7 @@ class TodoListViewController: UITableViewController {
         print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
         tableView.delegate = self
         tableView.dataSource = self
-
+        
         loadItems()
     }
     
@@ -109,4 +109,11 @@ class TodoListViewController: UITableViewController {
 //        }
     }
 }
+
+// MARK: - Search bar methods
     
+extension TodoListViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        <#code#>
+    }
+}
