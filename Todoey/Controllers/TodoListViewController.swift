@@ -107,7 +107,7 @@ class TodoListViewController: UITableViewController {
 extension TodoListViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         let text = searchBar.text!
-        if (!text.isEmpty) {
+        if !text.isEmpty {
             let request: NSFetchRequest<Item> = Item.fetchRequest()
             let predicate = NSPredicate(format: "title Contains [cd] %@", searchBar.text!)
             request.predicate = predicate
@@ -116,6 +116,12 @@ extension TodoListViewController: UISearchBarDelegate {
             
             loadItems(with: request)
         } else {
+            loadItems()
+        }
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchBar.text?.count == 0 {
             loadItems()
         }
     }
