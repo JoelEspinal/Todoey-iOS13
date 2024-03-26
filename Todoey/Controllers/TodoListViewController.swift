@@ -20,7 +20,7 @@ class TodoListViewController: UITableViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
-        loadItems()
+        loadItems(request: Item.fetchRequest())
     }
     
     // MARK - Tableview DatasourceMethodd
@@ -92,8 +92,7 @@ class TodoListViewController: UITableViewController {
         self.tableView.reloadData()
     }
     
-    func loadItems() {
-        let request: NSFetchRequest<Item> = Item.fetchRequest()
+    func loadItems(request: NSFetchRequest<Item>) {
         do {
             itemArray = try context.fetch(request)
         } catch {
@@ -120,12 +119,7 @@ extension TodoListViewController: UISearchBarDelegate {
         let sortDescriptor = NSSortDescriptor(key: "title", ascending: true)
         request.sortDescriptors = [sortDescriptor]
         
-        do {
-            itemArray = try context.fetch(request)
-        } catch {
-            print("fetching data from context \(error)")
-        }
-        
+        loadItems(request: request)
         tableView.reloadData()
     }
 }
