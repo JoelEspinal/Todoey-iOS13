@@ -114,6 +114,8 @@ class TodoListViewController: UITableViewController {
     
 extension TodoListViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        <#code#>
+        let request: NSFetchRequest<Item> = Item.fetchRequest()
+        let predicate = NSPredicate(format: "title Contains [cd] %@", searchBar.text!)
+        request.predicate = predicate
     }
 }
