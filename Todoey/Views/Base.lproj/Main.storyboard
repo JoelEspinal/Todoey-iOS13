@@ -7,7 +7,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Todoy-->
+        <!--Items-->
         <scene sceneID="lPI-KG-q4j">
             <objects>
                 <tableViewController id="IPx-ng-7ch" customClass="TodoListViewController" customModule="Todoey" sceneMemberID="viewController">
@@ -38,7 +38,7 @@
                             <outlet property="delegate" destination="IPx-ng-7ch" id="xRG-cH-317"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Todoy" id="FbC-la-fB9">
+                    <navigationItem key="navigationItem" title="Items" id="FbC-la-fB9">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="vCR-uH-rUK">
                             <color key="tintColor" systemColor="systemOrangeColor"/>
                             <connections>
