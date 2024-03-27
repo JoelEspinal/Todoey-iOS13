@@ -14,9 +14,20 @@ class CategoryViewController: UITableViewController {
         super.viewDidLoad()
 
     }
-
+    
+    
+    // MARK: - TableView Datasource Methods
+    
+    
+    // MARK: - Data Manipulation Methods
+    
+    
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
         
     }
+    
+    
+    // MARK: - TableView Delegate Methods
+    
     
 }
