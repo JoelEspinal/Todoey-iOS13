@@ -2,7 +2,7 @@
 //  CategoryViewController.swift
 //  Todoey
 //
-//  Created by Joel Espinal (ClaroDom) on 27/3/24.
+//  Created by Joel Espinal (JoelEspinal) on 27/3/24.
 //  Copyright © 2024 App Brewery. All rights reserved.
 //
 
