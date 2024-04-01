@@ -31,14 +31,12 @@ class CategoryViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView,  cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryItemCell", for: indexPath)
+        let categoryCell = tableView.dequeueReusableCell(withIdentifier: "CategoryItemCell", for: indexPath)
         
         let category = itemArray[indexPath.row]
-        cell.textLabel?.text = category.name
+        categoryCell.textLabel?.text = category.name
         
-      
-        
-        return cell
+        return categoryCell
     }
     
     

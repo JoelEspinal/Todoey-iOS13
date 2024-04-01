@@ -41,7 +41,6 @@ class TodoListViewController: UITableViewController {
             cell.accessoryType = .none
         }
         
-        
         return cell
     }
     
