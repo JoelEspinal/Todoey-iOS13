@@ -11,6 +11,8 @@ import CoreData
 
 class TodoListViewController: UITableViewController {
     
+    var selectedCategory: Category?
+    
     var itemArray: [Item] = [Item]()
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
