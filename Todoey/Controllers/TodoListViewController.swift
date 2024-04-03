@@ -95,17 +95,19 @@ class TodoListViewController: UITableViewController {
         self.tableView.reloadData()
     }
     
-    func loadItems(with request: NSFetchRequest<Item>? = Item.fetchRequest()) {
+    func loadItems(with request: NSFetchRequest<Item> = Item.fetchRequest(), predicate: NSPredicate? = nil) {
         
-        if request?.predicate == nil {
-            request?.predicate = NSPredicate(format: "parentCategory.name MATCHES %@", selectedCategory!.name!)
+        let categoryPredicate = NSPredicate(format: "parentCategory.name MATCHES %@", selectedCategory!.name!)
+        
+        if let aditionalPredicate = predicate {
+            request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [categoryPredicate, aditionalPredicate])
+        } else {
+            request.predicate = categoryPredicate
         }
         
         do {
-            if let request {
-                itemArray = try context.fetch(request)
-                tableView.reloadData()
-            }
+            itemArray = try context.fetch(request)
+            tableView.reloadData()
         } catch {
             printContent("Error fetching data from context \(error)")
         }
@@ -118,13 +120,13 @@ extension TodoListViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         let text = searchBar.text!
         if !text.isEmpty {
+            let predicate = NSPredicate(format: "title Contains [cd] %@", text)
             let request: NSFetchRequest<Item> = Item.fetchRequest()
-            let predicate = NSPredicate(format: "title Contains [cd] %@", searchBar.text!)
             request.predicate = predicate
             let sortDescriptor = NSSortDescriptor(key: "title", ascending: true)
             request.sortDescriptors = [sortDescriptor]
             
-            loadItems(with: request)
+            loadItems(with: request, predicate: predicate)
         } else {
             loadItems()
         }
