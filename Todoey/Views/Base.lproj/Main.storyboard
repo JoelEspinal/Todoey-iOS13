@@ -32,7 +32,7 @@
             </objects>
             <point key="canvasLocation" x="576" y="-37"/>
         </scene>
-        <!--Todoy-->
+        <!--Categories-->
         <scene sceneID="Z8L-Om-KRy">
             <objects>
                 <tableViewController id="WXe-SM-j7f" customClass="CategoryViewController" customModule="Todoey" sceneMemberID="viewController">
@@ -56,7 +56,7 @@
                         </connections>
                     </tableView>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Todoy" id="QNC-VX-QoH">
+                    <navigationItem key="navigationItem" title="Categories" id="QNC-VX-QoH">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="A5b-YV-Xnz">
                             <color key="tintColor" systemColor="systemOrangeColor"/>
                             <connections>

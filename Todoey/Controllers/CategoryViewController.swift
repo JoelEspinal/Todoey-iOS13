@@ -91,7 +91,7 @@ class CategoryViewController: UITableViewController {
     
     // MARK: - TableView Delegate Methods
     
-    
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let categoryItem = itemArray[indexPath.row]
         
