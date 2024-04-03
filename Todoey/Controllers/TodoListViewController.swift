@@ -11,7 +11,11 @@ import CoreData
 
 class TodoListViewController: UITableViewController {
     
-    var selectedCategory: Category?
+    var selectedCategory: Category? {
+        didSet{
+            loadItems()
+        }
+    }
     
     var itemArray: [Item] = [Item]()
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -21,8 +25,6 @@ class TodoListViewController: UITableViewController {
         print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
         tableView.delegate = self
         tableView.dataSource = self
-        
-        loadItems()
     }
     
     // MARK - Tableview DatasourceMethodd
@@ -65,7 +67,9 @@ class TodoListViewController: UITableViewController {
                 let newItem = Item(context: self.context)
                 newItem.title = newTitle
                 newItem.done = false
+                newItem.parentCategory = self.selectedCategory
                 self.itemArray.append(newItem)
+                
                 self.saveItems()
             }
         }
@@ -91,10 +95,17 @@ class TodoListViewController: UITableViewController {
         self.tableView.reloadData()
     }
     
-    func loadItems(with request: NSFetchRequest<Item> = Item.fetchRequest()) {
+    func loadItems(with request: NSFetchRequest<Item>? = Item.fetchRequest()) {
+        
+        if request?.predicate == nil {
+            request?.predicate = NSPredicate(format: "parentCategory.name MATCHES %@", selectedCategory!.name!)
+        }
+        
         do {
-            itemArray = try context.fetch(request)
-            tableView.reloadData()
+            if let request {
+                itemArray = try context.fetch(request)
+                tableView.reloadData()
+            }
         } catch {
             printContent("Error fetching data from context \(error)")
         }
