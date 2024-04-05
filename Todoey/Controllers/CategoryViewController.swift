@@ -44,11 +44,15 @@ class CategoryViewController: UITableViewController {
     
     // MARK: - Data Manipulation Methods
     
-    func saveItems() {
+    func save(category: Category) {
 //        let encoder = PropertyListEncoder()
         
         do {
-            try self.context.save()
+            try realm.write {
+                realm.add(category)
+            }
+            
+        
         } catch {
             print("Error saving context. \(error)")
         }
@@ -74,10 +78,10 @@ class CategoryViewController: UITableViewController {
         let action = UIAlertAction(title: "Add Category", style: .default) { (action) in
             let categoryName = textField.text!
             if !categoryName.isEmpty {
-                let newItem = Category(context: self.context)
-                newItem.name = categoryName
-                self.itemArray.append(newItem)
-                self.saveItems()
+                let category = Category()
+                category.name = categoryName
+                self.itemArray.append(category)
+                self.save(category: category)
             }
         }
     
