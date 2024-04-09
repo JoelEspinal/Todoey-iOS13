@@ -20,11 +20,13 @@ class CategoryViewController: UITableViewController {
 //    var itemArray: [Category] = [Category]()
 //    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         tableView.delegate = self
         tableView.dataSource = self
+        loadCategories()
     }
     
     
