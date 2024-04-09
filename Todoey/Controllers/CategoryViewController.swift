@@ -14,8 +14,10 @@ class CategoryViewController: UITableViewController {
 
     let realm = try! Realm()
     
+    var items = List<Category>()
+    
     var itemArray: [Category] = [Category]()
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+//    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,13 +62,12 @@ class CategoryViewController: UITableViewController {
         self.tableView.reloadData()
     }
     
-    func loadCategories(with request: NSFetchRequest<Category> = Category.fetchRequest()) {
-        do {
-            itemArray = try context.fetch(request)
+    func loadCategories(with request: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: String(describing: Category.self))) {
+    
+        guard let result = realm.objects(Category.self).first else {return}
+        
+//            items = result.items
             tableView.reloadData()
-        } catch {
-            printContent("Error fetching data from context \(error)")
-        }
     }
     
     
@@ -81,6 +82,7 @@ class CategoryViewController: UITableViewController {
                 let category = Category()
                 category.name = categoryName
                 self.itemArray.append(category)
+                
                 self.save(category: category)
             }
         }

@@ -8,8 +8,11 @@
 
 import UIKit
 import CoreData
+import RealmSwift
 
 class TodoListViewController: UITableViewController {
+
+    let realm = try! Realm()
     
     var selectedCategory: Category? {
         didSet{
@@ -18,7 +21,7 @@ class TodoListViewController: UITableViewController {
     }
     
     var itemArray: [Item] = [Item]()
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+//    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,8 +53,23 @@ class TodoListViewController: UITableViewController {
     
     // MARK - TableView Delegate Methods
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        itemArray[indexPath.row].done = !itemArray[indexPath.row].done
-        saveItems()
+        
+        
+        
+        let item = itemArray[indexPath.row]
+        do {
+            try realm.write {
+                item.done = !item.done
+            }
+        } catch {
+            print("Error saving done status, \(error)")
+        }
+        
+        
+//        itemArray[indexPath.row].done = !itemArray[indexPath.row].done
+//        saveItems()
+        
+        
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
@@ -64,13 +82,13 @@ class TodoListViewController: UITableViewController {
         let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
             let newTitle = textField.text!
             if !newTitle.isEmpty {
-                let newItem = Item(context: self.context)
+                let newItem = Item(value: newTitle)
                 newItem.title = newTitle
                 newItem.done = false
-                newItem.parentCategory = self.selectedCategory
-                self.itemArray.append(newItem)
                 
+                self.itemArray.append(newItem)
                 self.saveItems()
+
             }
         }
     
@@ -87,7 +105,7 @@ class TodoListViewController: UITableViewController {
 //        let encoder = PropertyListEncoder()
         
         do {
-            try self.context.save()
+//            try self.context.save()
         } catch {
             print("Error saving context. \(error)")
         }
@@ -95,9 +113,9 @@ class TodoListViewController: UITableViewController {
         self.tableView.reloadData()
     }
     
-    func loadItems(with request: NSFetchRequest<Item> = Item.fetchRequest(), predicate: NSPredicate? = nil) {
+    func loadItems(with request: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: String(describing: Item.self)), predicate: NSPredicate? = nil) {
         
-        let categoryPredicate = NSPredicate(format: "parentCategory.name MATCHES %@", selectedCategory!.name!)
+        let categoryPredicate = NSPredicate(format: "parentCategory.name MATCHES %@", selectedCategory!.name)
         
         if let aditionalPredicate = predicate {
             request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [categoryPredicate, aditionalPredicate])
@@ -106,7 +124,9 @@ class TodoListViewController: UITableViewController {
         }
         
         do {
-            itemArray = try context.fetch(request)
+            var result =  try realm.objects(Item.self)
+            // TODO: ensure to filter with request params
+            itemArray = result as? [Item] ?? []
             tableView.reloadData()
         } catch {
             printContent("Error fetching data from context \(error)")
@@ -117,16 +137,27 @@ class TodoListViewController: UITableViewController {
 // MARK: - Search bar methods
     
 extension TodoListViewController: UISearchBarDelegate {
+    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         let text = searchBar.text!
         if !text.isEmpty {
             let predicate = NSPredicate(format: "title Contains [cd] %@", text)
-            let request: NSFetchRequest<Item> = Item.fetchRequest()
-            request.predicate = predicate
-            let sortDescriptor = NSSortDescriptor(key: "title", ascending: true)
-            request.sortDescriptors = [sortDescriptor]
             
-            loadItems(with: request, predicate: predicate)
+            do {
+                
+//                let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: String(describing: Item.self))
+//                let sortDescriptor = NSSortDescriptor(key: "title", ascending: true)
+//                fetchRequest.sortDescriptors = [sortDescriptor]
+//                var request = try context.fetch<Item>(fetchRequest)
+              
+//                loadItems(with: fetchRequest, predicate: predicate)
+                
+            } catch {
+                printContent("Error fetching data from context \(error)")
+            }
+            
+           
+            
         } else {
             loadItems()
         }
