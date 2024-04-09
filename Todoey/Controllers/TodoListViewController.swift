@@ -13,6 +13,7 @@ import RealmSwift
 class TodoListViewController: UITableViewController {
 
     let realm = try! Realm()
+    var items = List<Item>()
     
     var selectedCategory: Category? {
         didSet{
@@ -20,7 +21,6 @@ class TodoListViewController: UITableViewController {
         }
     }
     
-    var itemArray: [Item] = [Item]()
 //    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     override func viewDidLoad() {
@@ -33,13 +33,13 @@ class TodoListViewController: UITableViewController {
     // MARK - Tableview DatasourceMethodd
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return itemArray.count
+        return items.count
     }
     
     override func tableView(_ tableView: UITableView,  cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TodoItemCell", for: indexPath)
         
-        let item = itemArray[indexPath.row]
+        let item = items[indexPath.row]
         cell.textLabel?.text = item.title
         
         if item.done {
@@ -56,7 +56,7 @@ class TodoListViewController: UITableViewController {
         
         
         
-        let item = itemArray[indexPath.row]
+        let item = items[indexPath.row]
         do {
             try realm.write {
                 item.done = !item.done
@@ -86,7 +86,7 @@ class TodoListViewController: UITableViewController {
                 newItem.title = newTitle
                 newItem.done = false
                 
-                self.itemArray.append(newItem)
+                self.items.append(newItem)
                 self.saveItems()
 
             }
@@ -126,7 +126,8 @@ class TodoListViewController: UITableViewController {
         do {
             var result =  try realm.objects(Item.self)
             // TODO: ensure to filter with request params
-            itemArray = result as? [Item] ?? []
+             guard let result = realm.objects(Category.self).first else {return}
+            items = result.items
             tableView.reloadData()
         } catch {
             printContent("Error fetching data from context \(error)")
