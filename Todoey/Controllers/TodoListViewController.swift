@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import CoreData
+//import CoreData
 import RealmSwift
 
 class TodoListViewController: UITableViewController {
@@ -41,13 +41,8 @@ class TodoListViewController: UITableViewController {
         
         let item = items[indexPath.row]
         cell.textLabel?.text = item.title
-        
-        if item.done {
-            cell.accessoryType = .checkmark
-        } else {
-            cell.accessoryType = .none
-        }
-        
+        cell.accessoryType = (item.done) ? .checkmark  : .none
+            
         return cell
     }
     
@@ -86,9 +81,15 @@ class TodoListViewController: UITableViewController {
                 newItem.title = newTitle
                 newItem.done = false
                 
-                self.items.append(newItem)
-                self.saveItems()
-
+                do {
+                    try self.realm.write {
+                        self.realm.add(newItem)
+                    }
+                } catch {
+                    print("Error saving Item: \(error)")
+                }
+               
+                
             }
         }
     
