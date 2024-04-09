@@ -101,11 +101,12 @@ class TodoListViewController: UITableViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    func saveItems() {
-//        let encoder = PropertyListEncoder()
-        
+    func saveItems(){
         do {
 //            try self.context.save()
+            try realm.write {
+                realm.add(items)
+            }
         } catch {
             print("Error saving context. \(error)")
         }
@@ -122,16 +123,10 @@ class TodoListViewController: UITableViewController {
         } else {
             request.predicate = categoryPredicate
         }
-        
-        do {
-            var result =  try realm.objects(Item.self)
             // TODO: ensure to filter with request params
              guard let result = realm.objects(Category.self).first else {return}
             items = result.items
             tableView.reloadData()
-        } catch {
-            printContent("Error fetching data from context \(error)")
-        }
     }
 }
 
@@ -144,21 +139,17 @@ extension TodoListViewController: UISearchBarDelegate {
         if !text.isEmpty {
             let predicate = NSPredicate(format: "title Contains [cd] %@", text)
             
-            do {
                 
 //                let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: String(describing: Item.self))
 //                let sortDescriptor = NSSortDescriptor(key: "title", ascending: true)
 //                fetchRequest.sortDescriptors = [sortDescriptor]
 //                var request = try context.fetch<Item>(fetchRequest)
-              
-//                loadItems(with: fetchRequest, predicate: predicate)
+    
+                guard let item = realm.objects(Item.self).first else {return}
+                items.append(item)
+                tableView.reloadData()
                 
-            } catch {
-                printContent("Error fetching data from context \(error)")
-            }
-            
-           
-            
+//                loadItems(with: fetchRequest, predicate: predicate)
         } else {
             loadItems()
         }
