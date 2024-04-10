@@ -10,6 +10,7 @@ import Foundation
 import RealmSwift
 
 class Category: Object {
+    @Persisted(primaryKey: true) var id = 0
     @objc dynamic var name: String = ""
     let items = List<Item>()
 }

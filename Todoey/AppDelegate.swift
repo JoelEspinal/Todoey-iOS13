@@ -28,9 +28,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         return true
     }
 
-    func applicationWillTerminate(_ application: UIApplication) {
+//    func applicationWillTerminate(_ application: UIApplication) {
 //        self.saveContext()
-    }
+//    }
     
 //     MARK: - Core Data stack
 //

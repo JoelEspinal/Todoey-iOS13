@@ -7,15 +7,16 @@
 //
 
 import UIKit
-import CoreData
+//import CoreData
 import RealmSwift
+import Realm
+
 
 class CategoryViewController: UITableViewController {
 
     let realm = try! Realm()
     
     var categories = List<Category>()
-    var items = List<Item>()
     
 //    var itemArray: [Category] = [Category]()
 //    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -23,7 +24,6 @@ class CategoryViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         tableView.delegate = self
         tableView.dataSource = self
         loadCategories()
@@ -33,15 +33,13 @@ class CategoryViewController: UITableViewController {
     // MARK: - TableView Datasource Methods
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return items.count
+        return categories.count
     }
     
     override func tableView(_ tableView: UITableView,  cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let categoryCell = tableView.dequeueReusableCell(withIdentifier: "CategoryItemCell", for: indexPath)
-        
         let category = categories[indexPath.row]
+        let categoryCell = tableView.dequeueReusableCell(withIdentifier: "CategoryItemCell", for: indexPath)
         categoryCell.textLabel?.text = category.name
-        
         return categoryCell
     }
     
@@ -51,7 +49,7 @@ class CategoryViewController: UITableViewController {
     func save(category: Category) {
         do {
             try realm.write {
-                realm.add(category)
+                realm.add(category, update: .all)
             }
         } catch {
             print("Error saving context. \(error)")
@@ -60,10 +58,28 @@ class CategoryViewController: UITableViewController {
         self.tableView.reloadData()
     }
     
-    func loadCategories(with request: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: String(describing: Category.self))) {
-    
-        guard let result = realm.objects(Category.self).first else {return}
-        items = result.items
+    func loadCategories() {
+//        do {
+//            let result = RealmHelper.getObjects<Category>()
+////            result.
+//             
+//
+//            let a  =   RealmHelper.toList(result)
+//
+//        } catch {
+//            print("error error")
+//        }
+//        
+//            
+//        let a = RealmHelper.toList(result)
+//        
+//        
+//        
+//        categories = a
+//        
+        
+       
+//        items = result.items
         tableView.reloadData()
     }
     
@@ -77,8 +93,8 @@ class CategoryViewController: UITableViewController {
             if !categoryName.isEmpty {
                 let category = Category()
                 category.name = categoryName
+                
                 self.categories.append(category)
-
                 self.save(category: category)
             }
         }
@@ -108,5 +124,18 @@ class CategoryViewController: UITableViewController {
         if let indexPath = tableView.indexPathForSelectedRow {
             destinationVC.selectedCategory = categories[indexPath.row]
         }
+    }
+}
+
+extension Results {
+    func toArray<T>(ofType: T.Type) -> [T] {
+        var array = [T]()
+        for i in 0 ..< self.count {
+            if let result = self[i] as? T {
+                array.append(result)
+            }
+        }
+
+        return array
     }
 }
