@@ -59,30 +59,10 @@ class CategoryViewController: UITableViewController {
     }
     
     func loadCategories() {
-//        do {
-//            let result = RealmHelper.getObjects<Category>()
-////            result.
-//             
-//
-//            let a  =   RealmHelper.toList(result)
-//
-//        } catch {
-//            print("error error")
-//        }
-//        
-//            
-//        let a = RealmHelper.toList(result)
-//        
-//        
-//        
-//        categories = a
-//        
-        
-       
-//        items = result.items
-        tableView.reloadData()
+        let result = realm.objects(Category.self)
+        let categoryArray = result.toArray(ofType: Category.self)
+        categories = RealmHelper.toList(categoryArray)
     }
-    
     
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
         var textField = UITextField()
