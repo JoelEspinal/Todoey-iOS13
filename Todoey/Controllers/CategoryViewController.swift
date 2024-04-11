@@ -7,7 +7,6 @@
 //
 
 import UIKit
-//import CoreData
 import RealmSwift
 import Realm
 
@@ -15,12 +14,7 @@ import Realm
 class CategoryViewController: UITableViewController {
 
     let realm = try! Realm()
-    
     var categories = List<Category>()
-    
-//    var itemArray: [Category] = [Category]()
-//    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,8 +87,6 @@ class CategoryViewController: UITableViewController {
     
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let categoryItem = categories[indexPath.row]
-        
         performSegue(withIdentifier: "goToItems", sender: self)
     }
     
@@ -104,18 +96,5 @@ class CategoryViewController: UITableViewController {
         if let indexPath = tableView.indexPathForSelectedRow {
             destinationVC.selectedCategory = categories[indexPath.row]
         }
-    }
-}
-
-extension Results {
-    func toArray<T>(ofType: T.Type) -> [T] {
-        var array = [T]()
-        for i in 0 ..< self.count {
-            if let result = self[i] as? T {
-                array.append(result)
-            }
-        }
-
-        return array
     }
 }
