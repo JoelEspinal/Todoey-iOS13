@@ -50,36 +50,6 @@
             endingLineNumber = "55"
             landmarkName = "save(category:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "0A36ECE8-01A9-4770-8ECC-954760B85833 - aa5a393cbe63c5f0"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Todoey.CategoryViewController.save(category: Todoey.Category) -&gt; ()"
-                  moduleName = "Todoey"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/joel%20espinal/development/JoelEspinal/repos/udemy-ios/angela-yu/Todoey-iOS13/Todoey/Controllers/CategoryViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "54"
-                  endingLineNumber = "54">
-               </Location>
-               <Location
-                  uuid = "0A36ECE8-01A9-4770-8ECC-954760B85833 - aa5a393cbe63c5d1"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Todoey.CategoryViewController.save(category: Todoey.Category) -&gt; ()"
-                  moduleName = "Todoey"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/joel%20espinal/development/JoelEspinal/repos/udemy-ios/angela-yu/Todoey-iOS13/Todoey/Controllers/CategoryViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "55"
-                  endingLineNumber = "55">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -118,7 +88,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "37B0A7C0-767B-4FDC-86D8-40CF6CE3309E"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Todoey/Controllers/CategoryViewController.swift"
@@ -128,36 +98,6 @@
             endingLineNumber = "58"
             landmarkName = "save(category:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "37B0A7C0-767B-4FDC-86D8-40CF6CE3309E - aa5a393cbe63ca0f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Todoey.CategoryViewController.save(category: Todoey.Category) -&gt; ()"
-                  moduleName = "Todoey"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/joel%20espinal/development/JoelEspinal/repos/udemy-ios/angela-yu/Todoey-iOS13/Todoey/Controllers/CategoryViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "57"
-                  endingLineNumber = "57">
-               </Location>
-               <Location
-                  uuid = "37B0A7C0-767B-4FDC-86D8-40CF6CE3309E - aa5a393cbe63ca6c"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Todoey.CategoryViewController.save(category: Todoey.Category) -&gt; ()"
-                  moduleName = "Todoey"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/joel%20espinal/development/JoelEspinal/repos/udemy-ios/angela-yu/Todoey-iOS13/Todoey/Controllers/CategoryViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "58"
-                  endingLineNumber = "58">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

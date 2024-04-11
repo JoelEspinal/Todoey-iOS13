@@ -92,8 +92,8 @@ class CategoryViewController: UITableViewController {
             let categoryName = textField.text!
             if !categoryName.isEmpty {
                 let category = Category()
+                category.id = category.incrementID()
                 category.name = categoryName
-                
                 self.categories.append(category)
                 self.save(category: category)
             }

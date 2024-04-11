@@ -79,7 +79,8 @@ class TodoListViewController: UITableViewController {
         let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
             let newTitle = textField.text!
             if !newTitle.isEmpty {
-                let newItem = Item(value: newTitle)
+                let newItem = Item()
+                newItem.id = newItem.incrementID()
                 newItem.title = newTitle
                 newItem.done = false
                 

@@ -14,4 +14,10 @@ class Item: Object {
     @objc dynamic var title: String = ""
     @objc dynamic var done: Bool = false
     var parentCategory = LinkingObjects(fromType: Category.self, property: "items")
+    
+    
+    func incrementID() -> Int {
+        let realm = try! Realm()
+        return (realm.objects(Item.self).max(ofProperty: "id") as Int? ?? 0) + 1
+    }
 }
