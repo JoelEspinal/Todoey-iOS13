@@ -94,7 +94,8 @@ class CategoryViewController: UITableViewController {
         let destinationVC = segue.destination as! TodoListViewController
         
         if let indexPath = tableView.indexPathForSelectedRow {
-            destinationVC.selectedCategory = categories[indexPath.row]
+            var category = categories[indexPath.row]
+            destinationVC.selectedCategory = category
         }
     }
 }

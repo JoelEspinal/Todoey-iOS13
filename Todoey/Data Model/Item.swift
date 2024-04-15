@@ -11,9 +11,9 @@ import RealmSwift
 
 class Item: Object {
     @Persisted(primaryKey: true) var id = 0
-    @objc dynamic var title: String = ""
-    @objc dynamic var done: Bool = false
-    var parentCategory = LinkingObjects(fromType: Category.self, property: "items")
+    @Persisted var title: String = ""
+    @Persisted var done: Bool = false
+    @Persisted var parentCategory = 0
     
     
     func incrementID() -> Int {

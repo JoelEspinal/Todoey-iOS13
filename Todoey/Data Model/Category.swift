@@ -7,12 +7,13 @@
 //
 
 import Foundation
+import Realm
 import RealmSwift
 
 class Category: Object {
     @Persisted(primaryKey: true) var id = 0
-    @objc dynamic var name: String = ""
-    let items = List<Item>()
+    @Persisted var name: String = ""
+    @Persisted var items = List<Item>()
     
     func incrementID() -> Int {
         let realm = try! Realm()

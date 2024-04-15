@@ -10,7 +10,7 @@ import UIKit
 import RealmSwift
 
 class TodoListViewController: UITableViewController {
-
+    
     let realm = try! Realm()
     
     var selectedCategory: Category? {
@@ -19,11 +19,9 @@ class TodoListViewController: UITableViewController {
         }
     }
     
-//    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
+//        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
         tableView.delegate = self
         tableView.dataSource = self
     }
@@ -41,15 +39,12 @@ class TodoListViewController: UITableViewController {
             cell.textLabel?.text = item.title
             cell.accessoryType = (item.done) ? .checkmark  : .none
         }
-     
+        
         return cell
     }
     
     // MARK - TableView Delegate Methods
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        
-        
         if let item = selectedCategory?.items[indexPath.row] {
             do {
                 try realm.write {
@@ -61,13 +56,6 @@ class TodoListViewController: UITableViewController {
             
             tableView.reloadData()
         }
-      
-        
-//        itemArray[indexPath.row].done = !itemArray[indexPath.row].done
-//        saveItems()
-        
-        
-//        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     // MARK - Add New Item
@@ -75,7 +63,7 @@ class TodoListViewController: UITableViewController {
         var textField = UITextField()
         
         let alert = UIAlertController(title: "Add new Todoey Item", message: "", preferredStyle: .alert)
-
+        
         let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
             let newTitle = textField.text!
             if !newTitle.isEmpty {
@@ -84,19 +72,18 @@ class TodoListViewController: UITableViewController {
                 newItem.title = newTitle
                 newItem.done = false
                 
-                do {
-                    try self.realm.write {
+                do{
+                    try self.realm.objects(Item.self).realm?.write({
                         self.selectedCategory?.items.append(newItem)
-//                        self.realm.add(newItem)
-                    }
+                    })
+                    
+                    self.tableView.reloadData()
                 } catch {
-                    print("Error saving Item: \(error)")
+                    print("Error saving items in selected Category \(error)")
                 }
-               
-                
             }
         }
-    
+        
         alert.addTextField { (alertTextField) in
             alertTextField.placeholder = "Create New Item"
             textField = alertTextField
@@ -105,66 +92,54 @@ class TodoListViewController: UITableViewController {
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
     }
+
     
-    func saveItems(){
-        if let category = selectedCategory {
-            do {
-    //            try self.context.save()
-                try self.realm.write {
-                    realm.add(category.items)
-                }
-            } catch {
-                print("Error saving context. \(error)")
-            }
-            
-            self.tableView.reloadData()
-        }
-        
-        
-    }
-    
-    func loadItems(/*with request: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: String(describing: Item.self)), predicate: NSPredicate? = nil*/) {
-        
-//        let categoryPredicate = NSPredicate(format: "parentCategory.name MATCHES %@", selectedCategory!.name)
-//        
-//        if let aditionalPredicate = predicate {
-//            request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [categoryPredicate, aditionalPredicate])
-//        } else {
-//            request.predicate = categoryPredicate
+    func loadItems() {
+//        if let category = selectedCategory {
+//            //            let predicate = NSPredicate(format: "id = %@", category.id)
+//            let item = realm.objects(Item.self)
+//            
+//            let result = item.where {
+//                $0.parentCategory == category.id
+//                
+//                // "Unable to parse the format string \"(ANY .id == %@)\""
+//               // return    // .parentCategory.id == category.id
+//            }
+//            
+//            var itemsArray = result.toArray(ofType: Item.self)
+//            tableView.reloadData()
 //        }
-            // TODO: ensure to filter with request params
-            guard let items = realm.objects(Item.self).first else {return}
-            selectedCategory?.items.append(items)
-        
-        
-//            items.append(result)
-        
-//            items = result.items
-            tableView.reloadData()
+
     }
 }
 
 // MARK: - Search bar methods
-    
+
 extension TodoListViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         let text = searchBar.text!
         if !text.isEmpty {
-//            let predicate/ = NSPredicate(format: "title Contains [cd] %@", text)
             
-                
-//                let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: String(describing: Item.self))
-//                let sortDescriptor = NSSortDescriptor(key: "title", ascending: true)
-//                fetchRequest.sortDescriptors = [sortDescriptor]
-//                var request = try context.fetch<Item>(fetchRequest)
-    
-            guard let item = realm.objects(Item.self).first else {return}
-            selectedCategory?.items.append(item)
-            tableView.reloadData()
-                
-            loadItems()
-//                loadItems(with: fetchRequest, predicate: predicate)
+            
+//            selectedCategory.items = selectedCategory.items.filter("title CONTAINS[dc] %@", searchBar.text)
+//
+            
+            
+            //            let predicate/ = NSPredicate(format: "title Contains [cd] %@", text)
+            
+            
+            //                let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: String(describing: Item.self))
+            //                let sortDescriptor = NSSortDescriptor(key: "title", ascending: true)
+            //                fetchRequest.sortDescriptors = [sortDescriptor]
+            //                var request = try context.fetch<Item>(fetchRequest)
+            
+//            guard let item = realm.objects(Item.self).first else {return}
+//            selectedCategory?.items.append(item)
+//            tableView.reloadData()
+//            
+//            loadItems()
+            //                loadItems(with: fetchRequest, predicate: predicate)
         } else {
             loadItems()
         }
